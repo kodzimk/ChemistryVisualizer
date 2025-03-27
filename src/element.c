@@ -96,14 +96,14 @@ void init_atoms(Element* element, int atom_x, int atom_y, int radious, SDL_Color
     element->radious = radious;
 
     int x = atom_x;
-    int y = atom_y - radious -  radious / 1.5;
+    int y = atom_y;
 
     int offsetx, offsety, d = 0;
     int proton = 0;
 
     for (size_t i = 0; i < element->protons_size; i++)
     {
-        if (i == 0 || i >= proton) {
+        if (i >= proton) {
             element->orbits[element->orbits_size].x = element->x;
             element->orbits[element->orbits_size].y = element->y;
 
@@ -145,22 +145,36 @@ void init_atoms(Element* element, int atom_x, int atom_y, int radious, SDL_Color
             d = 4;
         }
         else if (d == 4) {
-            y = atom_y + offsety / 2;
+            if (element->orbits_size == 2)
+                y = atom_y + offsety / 2;
+            else
+                y = atom_y + offsety / 3;
             x = atom_x - offsetx + radious / 3;
             d = 5;
         }
         else if (d == 5) {
-            y = atom_y + offsety / 2;
+           if(element->orbits_size == 2)
+               y = atom_y + offsety / 2;
+            else
+                y = atom_y + offsety / 3;
+
             x = atom_x + offsetx - radious / 3;
             d = 6;
         }
         else if (d == 6) {
-            y = atom_y - offsety / 2;
+            if (element->orbits_size == 2)
+                y = atom_y - offsety / 2;
+            else
+                y = atom_y - offsety / 3;
+
             x = atom_x + offsetx - radious / 3;
             d = 7;
         }
         else if (d == 7) {
-            y = atom_y - offsety / 2 ;
+            if (element->orbits_size == 2)
+                y = atom_y - offsety / 2;
+            else
+                y = atom_y - offsety / 3;
             x = atom_x - offsetx + radious / 3;
             d = 0;
         }
