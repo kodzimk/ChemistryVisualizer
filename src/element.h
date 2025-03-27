@@ -14,10 +14,20 @@ typedef struct {
 	int x;
 	int y;
 	int radious;
+}Orbit;
+
+typedef struct {
+	int x;
+	int y;
+	int radious;
 	SDL_Color color;
 
 	Proton protons[118];
 	int protons_size;
+
+	Orbit orbits[16];
+	int orbits_size;
+
 }Element;
 
 void init_atoms(Element* element,int atom_x,int atom_y, int radious, SDL_Color color,int linkedAtom_count);

@@ -21,8 +21,8 @@ void init_renderer(Renderer* render)
         exit(1);
     }
 
-    init_atoms(&render->firstElement, 100, 200, 30, (SDL_Color){.r = 255,.g = 0, .b = 0,.a = 255},1);
-    init_atoms(&render->secondElement, 250, 200, 30, (SDL_Color) { .r = 0, .g = 255, .b = 0, .a = 255 }, 0);
+    init_atoms(&render->firstElement, 100, 200, 20, (SDL_Color){.r = 255,.g = 0, .b = 0,.a = 255},2);
+    init_atoms(&render->secondElement, 350, 200, 20, (SDL_Color) { .r = 0, .g = 255, .b = 0, .a = 255 }, 18);
 }
 
 void update_renderer(Renderer* render)
