@@ -10,6 +10,11 @@
 *.userosscache
 *.sln.docstates
 
+/ChemistryVisualizer.vcxproj
+/ChemistryVisualizer.vcxproj.filters
+/ChemistryVisualizer.vcxproj.user
+/ChemistryVisualizer.sln
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -399,3 +404,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /game
+/ChemistryVisualizer.sln
+/ChemistryVisualizer.vcxproj
+/ChemistryVisualizer.vcxproj.filters
