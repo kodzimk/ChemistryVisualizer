@@ -1,5 +1,4 @@
 #include"renderer.h"
-#define RENDERER_H
 
 void init_renderer(Renderer* render)
 {
@@ -21,6 +20,9 @@ void init_renderer(Renderer* render)
         fprintf(stderr, "SDL could not create window! SDL_Error: %s\n", SDL_GetError());
         exit(1);
     }
+
+    init_atoms(&render->firstElement, 100, 200, 30, (SDL_Color){.r = 255,.g = 0, .b = 0,.a = 255},1);
+    init_atoms(&render->secondElement, 250, 200, 30, (SDL_Color) { .r = 0, .g = 255, .b = 0, .a = 255 }, 0);
 }
 
 void update_renderer(Renderer* render)
@@ -39,6 +41,9 @@ void update_renderer(Renderer* render)
         }
         SDL_SetRenderDrawColor(render->renderer, 0, 0, 255, 255);
         SDL_RenderClear(render->renderer);
+
+        draw_atoms(&render->firstElement, render->renderer);
+        draw_atoms(&render->secondElement, render->renderer);
         SDL_RenderPresent(render->renderer);
     }
     
