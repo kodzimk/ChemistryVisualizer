@@ -14,11 +14,16 @@ Moreover play and create fun element and expand knowledge about chemistry<br>
 # Build
 
 ## Linux
-Requirement gcc<br>
 
 ```sh
-git clone (link of project)
-sudo apt install build-essential
-sudo apt install libsdl2-dev
+./setup.sh
+make
+```
+
+## Windows
+
+```sh
+./windows.sh
+"here will be build folder and there will be .exe file"
 ```
 
