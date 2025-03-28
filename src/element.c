@@ -87,11 +87,12 @@ int draw_orbits(SDL_Renderer* renderer, int x, int y, int radius)
     return status;
 }
 
-void init_atoms(Element* element, int atom_x, int atom_y, int radious, SDL_Color color, int linkedAtom_count)
+void init_atoms(Element* element, int atom_x, int atom_y, int radious, SDL_Color color, int linkedAtom_count, Atom_Type type)
 {
     element->color = color;
-    element->protons_size = linkedAtom_count;
+    element->atom_type = type;
     element->x = atom_x;
+    element->proton_count = linkedAtom_count;
     element->y = atom_y;
     element->radious = radious;
 
@@ -101,7 +102,8 @@ void init_atoms(Element* element, int atom_x, int atom_y, int radious, SDL_Color
     int offsetx, offsety, d = 0;
     int proton = 0;
 
-    for (size_t i = 0; i < element->protons_size; i++)
+    int index = 0;
+    for (size_t i = 0; i < linkedAtom_count; i++)
     {
         if (i >= proton) {
             element->orbits[element->orbits_size].x = element->x;
@@ -122,6 +124,7 @@ void init_atoms(Element* element, int atom_x, int atom_y, int radious, SDL_Color
                 proton += 8;
 
             d = 0;
+            index = 0;
         }
 
         if (d == 0) {
@@ -179,10 +182,12 @@ void init_atoms(Element* element, int atom_x, int atom_y, int radious, SDL_Color
             d = 0;
         }
 
-        element->protons[i].color = color;
-        element->protons[i].x = x;
-        element->protons[i].y = y;
-        element->protons[i].radious = radious / 3;
+       element->orbits[element->orbits_size - 1].protons[index].color = color;
+       element->orbits[element->orbits_size - 1].protons[index].x = x;
+       element->orbits[element->orbits_size - 1].protons[index].y = y;
+       element->orbits[element->orbits_size - 1].protons[index].radious = radious / 3;
+       element->orbits[element->orbits_size - 1].protons_size += 1;
+       index++;
     }
 }
 
@@ -196,12 +201,11 @@ void draw_atoms(Element* element, SDL_Renderer* render)
     {
         SDL_SetRenderDrawColor(render, 0, 255, 255, 255);
         draw_orbits(render, element->orbits[i].x, element->orbits[i].y, element->orbits[i].radious);
-    }
-
-    for (size_t i = 0; i < element->protons_size; ++i)
-    {
-        SDL_SetRenderDrawColor(render, element->protons[i].color.r, element->protons[i].color.g,
-                                       element->protons[i].color.b, element->protons[i].color.a);
-        render_circle(render, element->protons[i].x, element->protons[i].y, element->protons[i].radious);
+        for (size_t j = 0; j < element->orbits[i].protons_size; ++j)
+        {    
+            SDL_SetRenderDrawColor(render, element->orbits[i].protons[j].color.r, element->orbits[i].protons[j].color.g,
+                                           element->orbits[i].protons[j].color.b, element->orbits[i].protons[j].color.a);
+            render_circle(render, element->orbits[i].protons[j].x, element->orbits[i].protons[j].y, element->orbits[i].protons[j].radious);
+        }
     }
 }
